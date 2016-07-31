@@ -4,6 +4,8 @@
 
 namespace GuiEngine {
 	
+#define BUTTON_ID    1001
+
 	class Window : public BaseWindow
 	{
 	public:
@@ -11,8 +13,7 @@ namespace GuiEngine {
 		~Window();
 
 	private:
-		
-
+		static LRESULT WindowProc(WindowHandler, UINT, WPARAM, LPARAM);
 	};
 
 }

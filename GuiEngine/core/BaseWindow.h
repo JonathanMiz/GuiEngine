@@ -5,6 +5,7 @@
 namespace GuiEngine
 {
 	using WindowHandler = HWND;
+
 	class BaseWindow
 	{
 	public:

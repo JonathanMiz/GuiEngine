@@ -42,6 +42,7 @@ namespace GuiEngine
 
 		winHandler = CreateWindow(windowName.c_str(), windowName.c_str(), WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME ^ WS_MAXIMIZEBOX, CW_USEDEFAULT, CW_USEDEFAULT, 500, 500, NULL, NULL, hInstance, NULL);
 
+
 		if (!winHandler)
 		{
 			throw std::runtime_error("Call to CreateWindow failed!");
@@ -49,9 +50,17 @@ namespace GuiEngine
 	}
 	LRESULT BaseWindow::WindowProc(WindowHandler hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 	{
+		WindowHandler button;
 		switch (message)
 		{
-
+		case WM_CREATE:
+			 button = CreateWindow("button", "Label",
+				WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON,
+				100, 200,
+				50, 20,
+				hwnd, (HMENU)1001,
+				GetModuleHandle(NULL), NULL);
+			break;
 		case WM_DESTROY:
 			PostQuitMessage(0);
 			break;
