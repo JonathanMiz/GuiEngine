@@ -118,15 +118,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="core\Image.cpp" />
+    <ClCompile Include="core\BaseWindow.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="core\Window.cpp" />
-    <ClCompile Include="core\Point.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="core\BaseWindow.h" />
     <ClInclude Include="core\Window.h" />
-    <ClInclude Include="core\Image.h" />
-    <ClInclude Include="core\Point.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

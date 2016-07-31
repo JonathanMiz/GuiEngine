@@ -1,11 +1,15 @@
+
 #include "core\Window.h"
+#include <memory>
 
 using namespace GuiEngine;
 
 
 int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInstance, LPSTR cmdLine, int cmdLineParams)
 {
-	Window w{ hInst,hPrevInstance,cmdLine,cmdLineParams,"Test window" };
+	
+	Window* win = new Window(hInst, "Window");
+	win->show(SW_SHOW);
 
 
 	MSG msg;
