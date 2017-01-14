@@ -118,12 +118,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="core\BaseWindow.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="core\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="core\BaseWindow.h" />
     <ClInclude Include="core\Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

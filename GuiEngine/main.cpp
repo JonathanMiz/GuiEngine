@@ -8,7 +8,7 @@ using namespace GuiEngine;
 int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInstance, LPSTR cmdLine, int cmdLineParams)
 {
 	
-	Window* win = new Window(hInst, "Window");
+	std::unique_ptr<Window> win(new Window(hInst, "Window"));
 	win->show(SW_SHOW);
 
 

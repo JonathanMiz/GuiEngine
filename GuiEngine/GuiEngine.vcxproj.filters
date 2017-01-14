@@ -21,15 +21,9 @@
     <ClCompile Include="core\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="core\BaseWindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\Window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="core\BaseWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

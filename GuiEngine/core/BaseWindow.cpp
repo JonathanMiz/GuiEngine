@@ -1,12 +1,12 @@
 #include "BaseWindow.h"
-
+#include <functional>
 
 namespace GuiEngine
 {
 
-	BaseWindow::BaseWindow(HINSTANCE hInstance, std::string windowName)
+	BaseWindow::BaseWindow(HINSTANCE hInstance, const std::string& windowName)
 	{
-		createWindow(hInstance, windowName);
+		
 	}
 
 	BaseWindow::~BaseWindow()
@@ -18,24 +18,15 @@ namespace GuiEngine
 		ShowWindow(winHandler, showParameters);
 	}
 
-	void BaseWindow::createWindow(HINSTANCE hInstance, std::string windowName)
+	void BaseWindow::createWindow(HINSTANCE hInstance, const std::string& windowName)
 	{
-		WNDCLASSEX wcex;
+		WNDCLASSEX windowClass = {};
 
-		wcex.cbSize = sizeof(WNDCLASSEX);
-		wcex.style = CS_HREDRAW | CS_VREDRAW;
-		wcex.lpfnWndProc = WindowProc;
-		wcex.cbClsExtra = 0;
-		wcex.cbWndExtra = 0;
-		wcex.hInstance = hInstance;
-		wcex.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_APPLICATION));
-		wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
-		wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-		wcex.lpszMenuName = NULL;
-		wcex.lpszClassName = windowName.c_str();
-		wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_APPLICATION));
+		windowClass.lpfnWndProc = WindowProc;
+		windowClass.hInstance = hInstance;
+		windowClass.lpszClassName = windowName.c_str();
 
-		if (!RegisterClassEx(&wcex))
+		if (!RegisterClassEx(&windowClass))
 		{
 			throw std::runtime_error("Call to RegisterClassEx failed!");
 		}
@@ -48,26 +39,30 @@ namespace GuiEngine
 			throw std::runtime_error("Call to CreateWindow failed!");
 		}
 	}
-	LRESULT BaseWindow::WindowProc(WindowHandler hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+
+	//LRESULT CALLBACK BaseWindow::WindowProcBridge(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+	//{
+	//	BaseWindow* pwindow = NULL;
+	//	pwindow = (BaseWindow*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+	//	if (pwindow != NULL)
+	//		return pwindow->WindowProc(hwnd, uMsg, wParam, lParam);
+	//	return 0;
+	//}
+
+	LRESULT CALLBACK BaseWindow::WindowProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 	{
-		WindowHandler button;
+		LRESULT result = 0;
 		switch (message)
 		{
 		case WM_CREATE:
-			 button = CreateWindow("button", "Label",
-				WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON,
-				100, 200,
-				50, 20,
-				hwnd, (HMENU)1001,
-				GetModuleHandle(NULL), NULL);
+			OutputDebugStringA("WM_CREATE\n");
 			break;
-		case WM_DESTROY:
-			PostQuitMessage(0);
-			break;
+
 		default:
-			return DefWindowProc(hwnd, message, wParam, lParam);
+			result = DefWindowProc(hwnd, message, wParam, lParam);
 			break;
 		}
-		return 0;
+
+		return result;
 	}
 }
